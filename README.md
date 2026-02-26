@@ -4,8 +4,9 @@ A VS Code extension to visually compare Mermaid flowcharts in Markdown files bet
 
 ## Features
 
-- Right from your Markdown editor, you can invoke a single command to see exactly what changed in your Mermaid diagrams.
-- Accurately parses and extracts the first Markdown Mermaid block (` ```mermaid ... ``` `).
+- **CodeLens Integration (New!):** Instantly see a clickable `🔍 Show Visual Diff` link directly above any Mermaid block in your editor.
+- **Multi-Block Support (New!):** Automatically detects and diffs specific Mermaid blocks when you have multiple diagrams in a single file. (Also respects your cursor position when triggered via the Command Palette).
+- Accurately parses and extracts Markdown Mermaid blocks (` ```mermaid ... ``` `).
 - Generates a side-by-side graphical diff rendered with Mermaid.js Webview:
   - **Added Nodes:** Highlighted with a green stroke and background (`fill:#e6ffed, stroke:#2ea043`).
   - **Removed Nodes:** Highlighted with a red dashed stroke and background (`fill:#ffebe9, stroke:#cf222e`).
@@ -17,8 +18,9 @@ A VS Code extension to visually compare Mermaid flowcharts in Markdown files bet
 1. Open any Markdown file containing a Mermaid flowchart (e.g. `graph TD` or `flowchart LR`) within a Git-tracked workspace.
 2. Ensure the file has been committed at least once.
 3. Make edits to the Mermaid diagram.
-4. Run the command **`Mermaid: Show Visual Diff`** from the VS Code command palette (`Cmd+Shift+P` / `Ctrl+Shift+P`).
-5. A Webview panel will open beside your editor displaying the colored diff.
+4. **Option A (Recommended):** Click the `🔍 Show Visual Diff` CodeLens link that appears just above your ` ```mermaid ` block!
+5. **Option B:** Place your cursor inside the Mermaid block and run the command **`Mermaid: Show Visual Diff`** from the VS Code command palette (`Cmd+Shift+P` / `Ctrl+Shift+P`).
+6. A Webview panel will open beside your editor displaying the colored diff for that specific diagram.
 
 ## Requirements
 
@@ -31,7 +33,6 @@ Presently, this extension does not contribute any customizable settings. It auto
 
 ## Known Issues
 
-- The extension currently only visualizes the *first* Mermaid block found in the Markdown file.
 - It strictly supports basic node/edge definitions within flowcharts (`graph` / `flowchart`). Complex diagrams (like sequence diagrams, gantt charts, or complex styling parameters natively defined on relationships) may not diff precisely.
 - Removed edges simply revert to a dashed connection (`-.->`), ignoring their previous label or explicit connection line type.
 
