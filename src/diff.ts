@@ -18,6 +18,13 @@ export interface ParsedMermaid {
     otherLines: string[];
 }
 
+export interface DiffColors {
+    addedColor: string;
+    addedStroke: string;
+    removedColor: string;
+    removedStroke: string;
+}
+
 export function parseMermaid(text: string): ParsedMermaid {
     const lines = text.split('\n');
     let typeLine = 'graph TD';
@@ -96,14 +103,14 @@ export function parseMermaid(text: string): ParsedMermaid {
     return { typeLine, nodes, edges, otherLines };
 }
 
-export function computeDiff(oldText: string, newText: string): string {
+export function computeDiff(oldText: string, newText: string, colors: DiffColors = { addedColor: '#e6ffed', addedStroke: '#2ea043', removedColor: '#ffebe9', removedStroke: '#cf222e' }): string {
     const oldParsed = parseMermaid(oldText);
     const newParsed = parseMermaid(newText);
 
     const resultLines: string[] = [
         newParsed.typeLine || oldParsed.typeLine || 'graph TD',
-        'classDef added fill:#e6ffed,stroke:#2ea043,stroke-width:2px;',
-        'classDef removed fill:#ffebe9,stroke:#cf222e,stroke-width:2px,stroke-dasharray: 5 5;',
+        `classDef added fill:${colors.addedColor},stroke:${colors.addedStroke},stroke-width:2px;`,
+        `classDef removed fill:${colors.removedColor},stroke:${colors.removedStroke},stroke-width:2px,stroke-dasharray: 5 5;`,
         'classDef unchanged fill:#f6f8fa,stroke:#d0d7de,stroke-width:1px;'
     ];
 

@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as cp from 'child_process';
 import * as path from 'path';
-import { computeDiff } from './diff';
+import { computeDiff, DiffColors } from './diff';
 import { MermaidCodeLensProvider } from './mermaidCodeLensProvider';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -103,8 +103,17 @@ export function activate(context: vscode.ExtensionContext) {
                 return;
             }
 
+            // Get Color Settings
+            const config = vscode.workspace.getConfiguration('mermaid-visual-diff');
+            const colors: DiffColors = {
+                addedColor: config.get('addedColor', '#e6ffed'),
+                addedStroke: config.get('addedStroke', '#2ea043'),
+                removedColor: config.get('removedColor', '#ffebe9'),
+                removedStroke: config.get('removedStroke', '#cf222e')
+            };
+
             // Compute Diff
-            const diffMermaid = computeDiff(oldMermaid, newMermaid);
+            const diffMermaid = computeDiff(oldMermaid, newMermaid, colors);
 
             // Show Webview
             const panel = vscode.window.createWebviewPanel(
@@ -116,7 +125,7 @@ export function activate(context: vscode.ExtensionContext) {
                 }
             );
 
-            panel.webview.html = getWebviewContent(diffMermaid);
+            panel.webview.html = getWebviewContent(oldMermaid, diffMermaid);
 
         } catch (error) {
             vscode.window.showErrorMessage(`Error getting Git HEAD: ${error}`);
@@ -126,17 +135,59 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(disposable);
 }
 
-function getWebviewContent(mermaidText: string): string {
+function getWebviewContent(oldMermaid: string, diffMermaid: string): string {
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mermaid Visual Diff</title>
+    <style>
+        body {
+            background-color: white;
+            color: #333;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+        .pane {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #fafafa;
+        }
+        h2 {
+            font-size: 16px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #555;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        /* Fallback message for empty graphs */
+        .empty-message {
+            color: #999;
+            font-style: italic;
+        }
+    </style>
 </head>
-<body style="background-color: white;">
-    <div class="mermaid">
-        ${mermaidText}
+<body>
+    <div class="container">
+        <div class="pane">
+            <h2>Original Graph</h2>
+            ${oldMermaid ? `<div class="mermaid">${oldMermaid}</div>` : `<p class="empty-message">No original graph found (New file or block).</p>`}
+        </div>
+        <div class="pane">
+            <h2>Visual Diff</h2>
+            <div class="mermaid">${diffMermaid}</div>
+        </div>
     </div>
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
