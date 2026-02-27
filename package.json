@@ -19,7 +19,32 @@
         "command": "mermaid-visual-diff.showVisualDiff",
         "title": "Mermaid: Show Visual Diff"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Mermaid Visual Diff",
+      "properties": {
+        "mermaid-visual-diff.addedColor": {
+          "type": "string",
+          "default": "#e6ffed",
+          "description": "Background color for added nodes/edges (e.g. #e6ffed, lightgreen)"
+        },
+        "mermaid-visual-diff.addedStroke": {
+          "type": "string",
+          "default": "#2ea043",
+          "description": "Stroke color for added nodes/edges (e.g. #2ea043, green)"
+        },
+        "mermaid-visual-diff.removedColor": {
+          "type": "string",
+          "default": "#ffebe9",
+          "description": "Background color for removed nodes/edges (e.g. #ffebe9, lightpink)"
+        },
+        "mermaid-visual-diff.removedStroke": {
+          "type": "string",
+          "default": "#cf222e",
+          "description": "Stroke color for removed nodes/edges (e.g. #cf222e, red)"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

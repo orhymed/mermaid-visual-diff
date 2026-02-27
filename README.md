@@ -7,7 +7,8 @@ A VS Code extension to visually compare Mermaid flowcharts in Markdown files bet
 - **CodeLens Integration (New!):** Instantly see a clickable `🔍 Show Visual Diff` link directly above any Mermaid block in your editor.
 - **Multi-Block Support (New!):** Automatically detects and diffs specific Mermaid blocks when you have multiple diagrams in a single file. (Also respects your cursor position when triggered via the Command Palette).
 - Accurately parses and extracts Markdown Mermaid blocks (` ```mermaid ... ``` `).
-- Generates a side-by-side graphical diff rendered with Mermaid.js Webview:
+- Generates a graphical diff rendered with Mermaid.js Webview:
+  - **Side-by-Side View:** The view automatically separates the *Original Graph* from the computed *Visual Diff* to clearly demonstrate what changed.
   - **Added Nodes:** Highlighted with a green stroke and background (`fill:#e6ffed, stroke:#2ea043`).
   - **Removed Nodes:** Highlighted with a red dashed stroke and background (`fill:#ffebe9, stroke:#cf222e`).
   - **Unchanged Nodes:** Shown in a neutral gray color (`fill:#f6f8fa, stroke:#d0d7de`).
@@ -29,7 +30,12 @@ A VS Code extension to visually compare Mermaid flowcharts in Markdown files bet
 
 ## Extension Settings
 
-Presently, this extension does not contribute any customizable settings. It automatically uses your system's `git` installation.
+This extension contributes the following settings, allowing you to customize the color schema of the visual diff:
+
+* `mermaid-visual-diff.addedColor`: Background color for added nodes/edges (default: `#e6ffed`)
+* `mermaid-visual-diff.addedStroke`: Stroke color for added nodes/edges (default: `#2ea043`)
+* `mermaid-visual-diff.removedColor`: Background color for removed nodes/edges (default: `#ffebe9`)
+* `mermaid-visual-diff.removedStroke`: Stroke color for removed nodes/edges (default: `#cf222e`)
 
 ## Known Issues
 
