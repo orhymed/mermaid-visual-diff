@@ -2,7 +2,14 @@
   "name": "mermaid-visual-diff",
   "displayName": "Mermaid Visual Diff",
   "description": "Show visual diff of Mermaid flowcharts in Markdown between Git HEAD and current edits",
-  "version": "0.0.1",
+  "version": "0.0.3",
+  "publisher": "orhymed",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/orhymed/mermaid-visual-diff.git"
+  },
+  "license": "MIT",
   "engines": {
     "vscode": "^1.80.0"
   },
