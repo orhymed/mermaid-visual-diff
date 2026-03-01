@@ -1,5 +1,9 @@
 # Mermaid Visual Diff
 
+<p align="center">
+  <img src="icon.png" width="128" alt="Mermaid Visual Diff Icon">
+</p>
+
 A VS Code extension to visually compare Mermaid flowcharts in Markdown files between the Git HEAD (last commit) and your current uncommitted edits.
 
 ## Features
@@ -13,6 +17,16 @@ A VS Code extension to visually compare Mermaid flowcharts in Markdown files bet
   - **Removed Nodes:** Highlighted with a red dashed stroke and background (`fill:#ffebe9, stroke:#cf222e`).
   - **Unchanged Nodes:** Shown in a neutral gray color (`fill:#f6f8fa, stroke:#d0d7de`).
   - **Removed Connections:** Depicted as dashed arrow lines (`-.->`).
+
+## Installation
+
+You can install this extension directly from within VS Code:
+
+1. Open the Extensions view (`Ctrl+Shift+X` or `Cmd+Shift+X`).
+2. Search for `mermaid-visual-diff` or `orhymed`.
+3. Click **Install**.
+
+*Also available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=orhymed.mermaid-visual-diff) and [Open VSX Registry](https://open-vsx.org/extension/orhymed/mermaid-visual-diff) (for VSCodium / Antigravity users).*
 
 ## How to use
 
