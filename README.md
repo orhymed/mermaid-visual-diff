@@ -58,6 +58,15 @@ This extension contributes the following settings, allowing you to customize the
 
 ## Release Notes
 
+### 0.0.3
+- Added transparency to the official extension icon.
+- Added MIT License for Open VSX Registry publication.
+
+### 0.0.2
+- **New Feature:** Added Webview Side-by-Side rendering for clear before/after comparison.
+- **New Feature:** Added Extension Settings (`settings.json`) for full customization of diff colors and strokes.
+- Officially published to VS Code Marketplace and Open VSX Registry.
+
 ### 0.0.1
 Initial release of Mermaid Visual Diff.
 
